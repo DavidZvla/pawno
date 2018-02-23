@@ -13,7 +13,13 @@ Para que funcione debes tener las canciones a reproducir en tu webhost.
 #include <a_samp>
 #define COL_ROJO 0x9F0000FF
 
+//Configuraciones:
+
+#define MAX_CANCIONES (3) //Aca colocan la cantidad de canciones que usaras.
+new PrimeraCancion[] = "http://www.tuservidor.com/musica/cancion.mp3"; //Aca colocas la ruta de la primera cancion.mp3 (esta no debe contener ningun numero)
 new Link[] = "http://www.tuservidor.com/musica/cancion%i.mp3"; //Aca coloca la ruta donde guardaras las canciones en tu host.
+
+//
 new Sonido[MAX_PLAYERS];
 new MusicaActiva = 1;
 
@@ -46,16 +52,16 @@ public OnPlayerConnect(playerid)
 	Sonido[playerid] = 1;
 	if(MusicaActiva == 1)
 	{
-	    new cancion = Random(0,2); //Aca deben cambiar segun la cantidad de canciones que van a reproducir. comenzando por 0, este es para 3 canciones 0,1,2.
+	    new cancion = Random(0, (MAX_CANCIONES-1));
 	    if(cancion == 0)
 	    {
-	        PlayAudioStreamForPlayer(playerid, "http://www.tuservidor.com/musica/cancion.mp3"); //Si el random es 0 Entonces reproduce la primera sin numero. (cambia el Link)
+	        PlayAudioStreamForPlayer(playerid, PrimeraCancion); //Si el random es 0 Entonces reproduce la primera sin numero.
 	    }
 	    else //Si no.. reproduce cualquier otra...
 	    {
 	        new string[120];
 	        format(string, sizeof(string), Link, cancion);
-			PlayAudioStreamForPlayer(playerid, string);
+		PlayAudioStreamForPlayer(playerid, string);
 	    }
 	}
 	return 1;
@@ -80,7 +86,7 @@ public OnPlayerSpawn(playerid)
 
 public OnPlayerCommandText(playerid, cmdtext[])
 {
-	if(strcmp("/activarmusica", cmdtext, true, 10) == 0)
+	if(strcmp("/actmusica", cmdtext, true, 10) == 0)
 	{
 		if(!IsPlayerAdmin(playerid)) return SendClientMessage(playerid, COL_ROJO, "No eres RCON Admin.");
 		else
