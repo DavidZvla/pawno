@@ -41,7 +41,7 @@ new MusicaActiva = 1;
 	}
 #endif
 
-Random(num1, num2)
+Variar(num1, num2)
 {
 new num = random(num2 - num1) + num1;
 return num;
@@ -52,7 +52,7 @@ public OnPlayerConnect(playerid)
 	Sonido[playerid] = 1;
 	if(MusicaActiva == 1)
 	{
-	    new cancion = Random(0, (MAX_CANCIONES-1));
+	    new cancion = Variar(0, (MAX_CANCIONES-1));
 	    if(cancion == 0)
 	    {
 	        PlayAudioStreamForPlayer(playerid, PrimeraCancion); //Si el random es 0 Entonces reproduce la primera sin numero.
