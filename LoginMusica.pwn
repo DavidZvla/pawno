@@ -21,7 +21,7 @@ new Link[] = "http://www.tuservidor.com/musica/cancion%i.mp3"; //Aca coloca la r
 
 //
 new Sonido[MAX_PLAYERS];
-new MusicaActiva = 1;
+new bool:MusicaActiva = true;
 
 #define FILTERSCRIPT
 #if defined FILTERSCRIPT
@@ -50,7 +50,7 @@ return num;
 public OnPlayerConnect(playerid)
 {
 	Sonido[playerid] = 1;
-	if(MusicaActiva == 1)
+	if(MusicaActiva)
 	{
 	    new cancion = Variar(0, (MAX_CANCIONES-1));
 	    if(cancion == 0)
@@ -59,7 +59,7 @@ public OnPlayerConnect(playerid)
 	    }
 	    else //Si no.. reproduce cualquier otra...
 	    {
-	        new string[120];
+	        new string[150];
 	        format(string, sizeof(string), Link, cancion);
 		PlayAudioStreamForPlayer(playerid, string);
 	    }
@@ -91,14 +91,14 @@ public OnPlayerCommandText(playerid, cmdtext[])
 		if(!IsPlayerAdmin(playerid)) return SendClientMessage(playerid, COL_ROJO, "No eres RCON Admin.");
 		else
 		{
-		    if(MusicaActiva == 1)
+		    if(MusicaActiva)
 		    {
-		        MusicaActiva = 0;
+		        MusicaActiva = false;
 		        return SendClientMessage(playerid, COL_ROJO, "Desactivaste la musica al inicio del servidor.");
 		    }
-			if(MusicaActiva == 0)
+		    if(!MusicaActiva)
 		    {
-		        MusicaActiva = 1;
+		        MusicaActiva = true;
 		        return SendClientMessage(playerid, COL_ROJO, "Activaste la musica al inicio del servidor.");
 		    }
 		}
