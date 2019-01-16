@@ -96,8 +96,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 	if(strcmp("/activatemusic", cmdtext, true, 10) == 0)
 	{
 		if(!IsPlayerAdmin(playerid)) return SendClientMessage(playerid, COL_RED, "Server : Log in like RCON Admin to use this cmd.");
-		else
-		{
+		else{
 		    if(MusicAct)
 		    {
 		        MusicAct = false;
