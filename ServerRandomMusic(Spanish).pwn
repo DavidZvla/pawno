@@ -1,4 +1,4 @@
-//Musica Variada al inicio de tu servidor by Zavalak47
+//Musica Variada al inicio de tu servidor by Alterego - D.Z.
 /*
 
 Este Filterscript te permite reproducir musica variada al inicio de tu servidor
